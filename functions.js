@@ -37,7 +37,7 @@ function getHumanChoice() {
 var human_score = 0;
 var computer_score = 0;
 
-function getResult(computerChoice, yourChoice) {
+function playRound(computerChoice, yourChoice) {
     var result
     if (computerChoice == "r" && yourChoice == "r" || computerChoice == "p" && yourChoice == "p" || computerChoice == "s" && yourChoice == "s") {
         result = "it's a Tie"
@@ -51,6 +51,6 @@ function getResult(computerChoice, yourChoice) {
         human_score++
     }
     console.log(result);
-    prompt(result + " The Score is you: " + human_score + "computer: " + computer_score + " press any button to continue")
-    getResult(getComputerChoice(), getHumanChoice())
+    prompt(result + " The Score is you: " + human_score + " computer: " + computer_score + " press any button to continue")
+    playRound(getComputerChoice(), getHumanChoice())
 }
