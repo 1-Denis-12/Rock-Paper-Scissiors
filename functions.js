@@ -53,6 +53,4 @@ function playRound(computerChoice, yourChoice) {
         computer_score = 0
     }
     scoreBoard.textContent = result
-    
-
 }
