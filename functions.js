@@ -1,3 +1,12 @@
+const btn = document.querySelectorAll("button");
+const scoreBoard = document.querySelector("#score")
+
+btn.forEach((button) =>{
+    button.addEventListener('click', () => {
+        playRound(getComputerChoice(), button.id)        
+})
+})
+
 function getComputerChoice() {
     var computerChoice
     random_number = (Math.random()* 100);
@@ -15,42 +24,35 @@ function getComputerChoice() {
     return computerChoice;
 }
 
-function getHumanChoice() {
-    answer = false
-    var yourChoice = prompt("Select r for Rock, p for Papper, or s for Scissiors")
-    while (answer != true){
-    if (yourChoice == "r") {
-        answer = true
-    }
-    else if (yourChoice == "p") {
-        answer = true
-    } 
-    else if (yourChoice == "s") {
-        answer = true
-        console.log(yourChoice)
-    }
-    else yourChoice = prompt("Error - Select r for Rock, p for Papper, or s for Scissiors")
-    }   
-    return yourChoice;
-}
 
 var human_score = 0;
 var computer_score = 0;
 
 function playRound(computerChoice, yourChoice) {
     var result
-    if (computerChoice == "r" && yourChoice == "r" || computerChoice == "p" && yourChoice == "p" || computerChoice == "s" && yourChoice == "s") {
-        result = "it's a Tie"
+    if (computerChoice == "r" && yourChoice == "rock-button" || computerChoice == "p" && yourChoice == "paper-button" || computerChoice == "s" && yourChoice == "scissiors-button") {
+        result = "it's a Tie " + "the Score is you:" + human_score + " Computer: " + computer_score 
     }
-    else if(computerChoice == "r" && yourChoice == "s" || computerChoice == "p" && yourChoice == "r" || computerChoice == "s" && yourChoice == "p") {
-        result = "You lost"
+    else if(computerChoice == "r" && yourChoice == "scissiors-button" || computerChoice == "p" && yourChoice == "rock-button" || computerChoice == "s" && yourChoice == "paper-button") {
+        result = "You lost " + "the Score is you:" + human_score + " Computer: " + computer_score 
         computer_score++
     }
-    else if (computerChoice == "r" && yourChoice == "p" || computerChoice == "p" && yourChoice == "s" || computerChoice == "s" && yourChoice == "r") {
-        result = "you Win!!!"
+    else if (computerChoice == "r" && yourChoice == "paper-button" || computerChoice == "p" && yourChoice == "scissiors-button" || computerChoice == "s" && yourChoice == "rock-button") {
+        result = "you Win!!! " + "the Score is you:" + human_score + " Computer: " + computer_score 
         human_score++
     }
-    console.log(result);
-    prompt(result + " The Score is you: " + human_score + " computer: " + computer_score + " press any button to continue")
-    playRound(getComputerChoice(), getHumanChoice())
+
+    if (human_score == 5) {
+        result = "Game Over!! you win!!! The final score is" + human_score + "--" + computer_score;
+        human_score = 0
+        computer_score = 0
+    }
+    else if (computer_score == 5) {
+        result = "Game Over!! you lose): The final score is: " + human_score + " -- " + computer_score;
+        human_score = 0 
+        computer_score = 0
+    }
+    scoreBoard.textContent = result
+    
+
 }
